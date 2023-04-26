@@ -6,7 +6,7 @@ test('nextShipLengthToSet - simple', () => {
   expect(GameBoard.nextShipLengthToSet(1)).toBe(5);
 });
 
-test('setShip - simple player1', ()=>{
+test('setShip - simple player1', () => {
   GameBoard.init();
   expect(GameBoard.setShip(0, 8, 1, 0)).toBe(false);
   expect(GameBoard.setShip(0, 0, 1, 0)).toBe(true);
@@ -17,7 +17,7 @@ test('setShip - simple player1', ()=>{
   expect(GameBoard.setShip(1, 5, 1, 0)).toBe(true);
 });
 
-test('setShip - simple player2', ()=>{
+test('setShip - simple player2', () => {
   GameBoard.init();
   expect(GameBoard.setShip(8, 0, 0, 1)).toBe(false);
   expect(GameBoard.setShip(0, 0, 0, 1)).toBe(true);
@@ -28,7 +28,7 @@ test('setShip - simple player2', ()=>{
   expect(GameBoard.setShip(5, 1, 0, 1)).toBe(true);
 });
 
-test('setShip - intersection', ()=>{
+test('setShip - intersection', () => {
   GameBoard.init();
   expect(GameBoard.setShip(0, 0, 1, 0)).toBe(true);
   expect(GameBoard.setShip(0, 4, 1, 0)).toBe(false);
