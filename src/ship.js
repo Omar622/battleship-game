@@ -6,6 +6,7 @@ export default function Ship(len) {
   const isSunk = () => numberOfHit >= length;
 
   return {
+    length,
     hit,
     isSunk
   };
