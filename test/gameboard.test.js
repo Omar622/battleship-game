@@ -35,3 +35,13 @@ test('setShip - intersection', () => {
   expect(GameBoard.setShip(1, 0, 1, 1)).toBe(true);
   expect(GameBoard.setShip(1, 4, 1, 1)).toBe(false);
 });
+
+test('receiveAttack - simple', () => {
+  GameBoard.init();
+  expect(GameBoard.setShip(0, 0, 1, 0)).toBe(true);
+  expect(GameBoard.receiveAttack(0, 0, 0)).toBe(false);
+  expect(GameBoard.receiveAttack(0, 0, 1)).toBe(true);
+  expect(GameBoard.receiveAttack(0, 0, 1)).toBe(false);
+});
+
+// TODO: make tests for gameStatus method.

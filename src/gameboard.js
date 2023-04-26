@@ -4,9 +4,9 @@ function Cell() {
   let isAttacked = [0, 0];
   let isThereShip = 0;
   let whichPlayer = 0;
-  let whichIndex = 0;
+  let whichShipIndex = 0;
   return {
-    isAttacked, isThereShip, whichPlayer, whichIndex
+    isAttacked, isThereShip, whichPlayer, whichShipIndex
   };
 }
 
@@ -120,13 +120,13 @@ const GameBoard = (function () { // by default 10x10
       for (let k = j; k < j + length; ++k) {
         board[i][k].isThereShip = 1;
         board[i][k].whichPlayer = player;
-        board[i][k].whichIndex = toSetShipIndex[player];
+        board[i][k].whichShipIndex = toSetShipIndex[player];
       }
     } else {
       for (let k = i; k < i + length; ++k) {
         board[k][j].isThereShip = 1;
         board[k][j].whichPlayer = player;
-        board[k][j].whichIndex = toSetShipIndex[player];
+        board[k][j].whichShipIndex = toSetShipIndex[player];
       }
     }
     ++toSetShipIndex[player];
@@ -134,12 +134,41 @@ const GameBoard = (function () { // by default 10x10
   }
 
   const receiveAttack = (i, j, player) => {
+    if (board[i][j].isAttacked[player])
+      return false;
+
     board[i][j].isAttacked[player] = 1;
-    return board[i][j].isThereShip && board[i][j].whichPlayer !== player;
+    if (board[i][j].isThereShip && board[i][j].whichPlayer !== player) {
+      ships[1 - player][board[i][j].whichShipIndex].hit();
+      return true;
+    }
+    return false;
+  }
+
+  const gameStatus = () => {
+    let isWinner = [true, true];
+    for (let i = 0; i < 5; ++i) {
+      if (!ships[PLAYER1][i].isSunk()) {
+        isWinner[PLAYER1] = false;
+        break;
+      }
+    }
+    for (let i = 0; i < 5; ++i) {
+      if (!ships[PLAYER2][i].isSunk()) {
+        isWinner[PLAYER2] = false;
+        break;
+      }
+    }
+    if (!isWinner[PLAYER1] && !isWinner[PLAYER2])
+      return 0;
+    if (isWinner[PLAYER1])
+      return 1;
+    if (isWinner[PLAYER2])
+      return 2;
   }
 
   return {
-    init, setShip, nextShipLengthToSet, receiveAttack
+    init, setShip, nextShipLengthToSet, receiveAttack, gameStatus
   }
 })();
 
