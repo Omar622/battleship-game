@@ -167,8 +167,14 @@ const GameBoard = (function () { // by default 10x10
       return 2;
   }
 
+  const isAttackedBy = (i, j, player) => {
+    if(!isValidCord(i) || !isValidCord(j)) return false;
+    return board[i][j].isAttacked && board[i][j].whichPlayer != player;
+  }
+
   return {
-    init, setShip, nextShipLengthToSet, receiveAttack, gameStatus
+    init, setShip, isValidShipPlace, nextShipLengthToSet
+    , receiveAttack, isAttackedBy, gameStatus
   }
 })();
 
