@@ -1,0 +1,31 @@
+.game-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.cell {
+  height: 55px;
+  width: 55px;
+}
+
+.hide {
+  display: none;
+}
+
+.hover {
+  background-color: #a9a9a9;
+}
+
+.good-attack {
+  color: red;
+}
+
+.play-btn {
+  width: 120px;
+  height: 40px;
+}
