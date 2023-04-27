@@ -54,8 +54,8 @@ const GameBoard = (function () { // by default 10x10
       if (isValidCord(j - 1) && board[i][j - 1].isThereShip
         && board[i][j - 1].whichPlayer == player)
         return false;
-      if (isValidCord(j + len - 1) && board[i][j + len - 1].isThereShip
-        && board[i][j + len - 1].whichPlayer == player)
+      if (isValidCord(j + len) && board[i][j + len].isThereShip
+        && board[i][j + len].whichPlayer == player)
         return false;
 
       if (isValidCord(i - 1)) {
@@ -84,8 +84,8 @@ const GameBoard = (function () { // by default 10x10
       if (isValidCord(i - 1) && board[i - 1][j].isThereShip
         && board[i - 1][j].whichPlayer == player)
         return false;
-      if (isValidCord(i + len - 1) && board[i + len - 1][j].isThereShip
-        && board[i + len - 1][j].whichPlayer == player)
+      if (isValidCord(i + len) && board[i + len][j].isThereShip
+        && board[i + len][j].whichPlayer == player)
         return false;
 
       if (isValidCord(j - 1)) {
