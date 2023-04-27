@@ -1,5 +1,10 @@
 import Ship from './ship.js';
 
+export const Player = {
+  ONE: 0,
+  TWO: 1
+};
+
 function Cell() {
   let isAttacked = [0, 0];
   let isThereShip = 0;
@@ -12,19 +17,17 @@ function Cell() {
 
 const GameBoard = (function () { // by default 10x10
   const DIMENSION = 10;
-  const PLAYER1 = 0;
-  const PLAYER2 = 1;
 
   let toSetShipIndex = [];
   const ships = [];
   const board = [];
 
   const init = () => {
-    toSetShipIndex[PLAYER1] = 0;
-    toSetShipIndex[PLAYER2] = 0;
-    ships[PLAYER1] = [new Ship(5), new Ship(4), new Ship(3)
+    toSetShipIndex[Player.ONE] = 0;
+    toSetShipIndex[Player.TWO] = 0;
+    ships[Player.ONE] = [new Ship(5), new Ship(4), new Ship(3)
       , new Ship(3), new Ship(2)];
-    ships[PLAYER2] = [new Ship(5), new Ship(4), new Ship(3)
+    ships[Player.TWO] = [new Ship(5), new Ship(4), new Ship(3)
       , new Ship(3), new Ship(2)];
 
     for (let i = 0; i < DIMENSION; ++i) {
@@ -148,27 +151,27 @@ const GameBoard = (function () { // by default 10x10
   const gameStatus = () => {
     let isWinner = [true, true];
     for (let i = 0; i < 5; ++i) {
-      if (!ships[PLAYER1][i].isSunk()) {
-        isWinner[PLAYER1] = false;
+      if (!ships[Player.ONE][i].isSunk()) {
+        isWinner[Player.ONE] = false;
         break;
       }
     }
     for (let i = 0; i < 5; ++i) {
-      if (!ships[PLAYER2][i].isSunk()) {
-        isWinner[PLAYER2] = false;
+      if (!ships[Player.TWO][i].isSunk()) {
+        isWinner[Player.TWO] = false;
         break;
       }
     }
-    if (!isWinner[PLAYER1] && !isWinner[PLAYER2])
+    if (!isWinner[Player.ONE] && !isWinner[Player.TWO])
       return 0;
-    if (isWinner[PLAYER1])
+    if (isWinner[Player.ONE])
       return 1;
-    if (isWinner[PLAYER2])
+    if (isWinner[Player.TWO])
       return 2;
   }
 
   const isAttackedBy = (i, j, player) => {
-    if(!isValidCord(i) || !isValidCord(j)) return false;
+    if (!isValidCord(i) || !isValidCord(j)) return false;
     return board[i][j].isAttacked && board[i][j].whichPlayer != player;
   }
 
