@@ -1,3 +1,4 @@
+import { player2Attacks } from './player2.js';
 import Ship from './ship.js';
 
 export const Player = {
@@ -172,12 +173,20 @@ const GameBoard = (function () { // by default 10x10
 
   const isAttackedBy = (i, j, player) => {
     if (!isValidCord(i) || !isValidCord(j)) return false;
-    return board[i][j].isAttacked && board[i][j].whichPlayer != player;
+    return board[i][j].isAttacked[player];
+  }
+
+  const isThereShip = (i, j, player) => {
+    return board[i][j].isThereShip && board[i][j].whichPlayer == player;
+  }
+
+  const isSunk = (i, j, player) => {
+    return ships[player][board[i][j].whichShipIndex].isSunk();
   }
 
   return {
     init, setShip, isValidShipPlace, nextShipLengthToSet
-    , receiveAttack, isAttackedBy, gameStatus
+    , receiveAttack, isAttackedBy, isThereShip, isSunk, gameStatus
   }
 })();
 
