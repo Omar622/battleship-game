@@ -153,13 +153,13 @@ const GameBoard = (function () { // by default 10x10
     let isWinner = [true, true];
     for (let i = 0; i < 5; ++i) {
       if (!ships[Player.ONE][i].isSunk()) {
-        isWinner[Player.ONE] = false;
+        isWinner[Player.TWO] = false;
         break;
       }
     }
     for (let i = 0; i < 5; ++i) {
       if (!ships[Player.TWO][i].isSunk()) {
-        isWinner[Player.TWO] = false;
+        isWinner[Player.ONE] = false;
         break;
       }
     }
